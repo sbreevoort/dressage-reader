@@ -90,4 +90,13 @@ export const applications: Application[] = [
       import('./apps/nutrition').then((m) => ({ default: m.NutritionAdvisorApp }))
     ),
   },
+  {
+    name: 'Spraak Tester',
+    avatar: 'SPR',
+    routePath: '/spraak-tester',
+    accessRoles: ['SPRAAK_TESTER'],
+    component: lazy(() =>
+      import('./apps/spraaktester').then((m) => ({ default: m.SpeechTesterApp }))
+    ),
+  },
 ];
