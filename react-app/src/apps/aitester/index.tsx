@@ -5,9 +5,15 @@ import { Button } from '../../libs/shared/components';
 import { pingClaude } from '../../libs/shared/utils/anthropicApi';
 import './aitester.css';
 
-const STATUS_URL = 'https://status.claude.com/';
+const CLAUDE_STATUS_URL = 'https://status.claude.com/';
+const GITHUB_STATUS_URL = 'https://www.githubstatus.com/';
 
-const ClaudeStatusSection = () => {
+interface StatusSectionProps {
+  url: string;
+  title: string;
+}
+
+const StatusSection = ({ url, title }: StatusSectionProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [embedBlocked, setEmbedBlocked] = useState(false);
@@ -32,7 +38,7 @@ const ClaudeStatusSection = () => {
 
   return (
     <div className="aitester-status">
-      <h2 className="aitester-status-title">Claude System Status</h2>
+      <h2 className="aitester-status-title">{title}</h2>
 
       {!embedBlocked && (
         <div className="aitester-status-iframe-container">
@@ -43,8 +49,8 @@ const ClaudeStatusSection = () => {
           )}
           <iframe
             ref={iframeRef}
-            src={STATUS_URL}
-            title="Claude System Status"
+            src={url}
+            title={title}
             className={`aitester-status-iframe${isLoading ? ' aitester-status-iframe--hidden' : ''}`}
             onLoad={handleIframeLoad}
             onError={handleIframeError}
@@ -54,21 +60,21 @@ const ClaudeStatusSection = () => {
 
       {embedBlocked && (
         <div className="aitester-status-fallback">
-          <p>The Claude status page cannot be embedded directly due to browser security policies.</p>
+          <p>The status page cannot be embedded directly due to browser security policies.</p>
           <a
-            href={STATUS_URL}
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
             className="aitester-status-link"
           >
-            View Claude Status Page →
+            View {title} →
           </a>
         </div>
       )}
 
       {!embedBlocked && (
         <div className="aitester-status-direct-link">
-          <a href={STATUS_URL} target="_blank" rel="noopener noreferrer">
+          <a href={url} target="_blank" rel="noopener noreferrer">
             Open full status page ↗
           </a>
         </div>
@@ -104,7 +110,10 @@ export const AITesterApp = (_props: AppComponentProps) => {
 
       <hr className="aitester-divider" />
 
-      <ClaudeStatusSection />
+      <div className="aitester-status-grid">
+        <StatusSection url={CLAUDE_STATUS_URL} title="Claude System Status" />
+        <StatusSection url={GITHUB_STATUS_URL} title="GitHub System Status" />
+      </div>
     </div>
   );
 };

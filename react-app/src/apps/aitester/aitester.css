@@ -133,6 +133,19 @@
   text-decoration: underline;
 }
 
+.aitester-status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .aitester-status-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 600px) {
   .aitester-status-iframe-container {
     height: 400px;
