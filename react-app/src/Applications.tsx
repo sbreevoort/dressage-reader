@@ -99,4 +99,13 @@ export const applications: Application[] = [
       import('./apps/spraaktester').then((m) => ({ default: m.SpeechTesterApp }))
     ),
   },
+  {
+    name: 'Intake Assistent',
+    avatar: 'INT',
+    routePath: '/intake-assistent',
+    accessRoles: ['INTAKE_ASSISTENT'],
+    component: lazy(() =>
+      import('./apps/intakeassistent').then((m) => ({ default: m.IntakeAssistentApp }))
+    ),
+  },
 ];
