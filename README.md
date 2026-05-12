@@ -1,3 +1,4 @@
-# claude-tryit
+# dressage-reader
 
-A playground repository for experimenting with Claude Code GitHub integration.
+A Progressive Web App (PWA) for calling dressage tests.
+The app reads dressage tests out loud.
