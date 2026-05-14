@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Remove-Item -Recurse -Force src/apps/aitester, src/apps/creator, src/apps/imon, src/apps/intakeassistent, src/apps/nutrition, src/apps/pitchgenerator, src/apps/rekentool, src/apps/spraaktester, src/apps/vitality, src/apps/.gitkeep)",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\stefa\\\\Documents\\\\GitHub\\\\dressage-reader\\\\.claude\\\\worktrees\\\\interesting-austin-6b9d4e\\\\react-app\\\\public\\\\icons\")",
+      "Bash(pnpm install *)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm approve-builds *)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(pnpm build *)"
+    ]
+  }
+}

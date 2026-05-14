@@ -1,11 +1,5 @@
-import './App.css'
+import { DressageReaderApp } from './apps/dressagereader'
 
-const App = () => {
-  return (
-    <div className="app">
-      <h1>Application Portal</h1>
-    </div>
-  )
-}
+const App = () => <DressageReaderApp />
 
 export default App

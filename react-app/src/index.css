@@ -42,10 +42,16 @@
   box-sizing: border-box;
 }
 
-body {
+html,
+body,
+#root {
+  height: 100%;
   margin: 0;
+}
+
+body {
   font-family: system-ui, -apple-system, sans-serif;
   background-color: var(--bg-app);
   color: var(--text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow: hidden;
 }

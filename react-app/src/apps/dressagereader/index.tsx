@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import type { AppComponentProps } from '../../Applications';
-import { Button } from '../../libs/shared/components';
+import { Button } from '../../libs/shared/components/Button/Button';
 import './DressageReader.css';
 
 interface DressageTest {
@@ -11,18 +10,74 @@ interface DressageTest {
 
 const SELF_NARRATION_VALUE = '__self__';
 
-const DRESSAGE_TESTS: DressageTest[] = [{
-    "id": "B20",
-    "title": "Proef B20",
-    "steps": ["A-X-C: Binnenkomen in arbeidsdraf", "C: Linkerhand", "H-K: Gebroken lijn 5 meter", "F-X-H: Van hand veranderen en enkele passen de draf verruimen", "M-F: Gebroken lijn 5 meter", "E-B-E: Grote volte en na enkele drafpassen het paard de hals laten strekken", "Tussen E en H: Teugels op maat maken", "B-E-B: Grote volte", "Op de volte tussen E en B: Arbeidsgalop rechts aanspringen", "A-X-A: Grote volte", "Tussen A en K: Overgang arbeidsdraf", "E-M: Van hand veranderen", "C-X-C: Grote volte", "Op de volte tussen X en C: Arbeidsgalop links aanspringen", "E-B-E: Grote volte", "Tussen E en K: Overgang arbeidsdraf", "Tussen A en F: Overgang arbeidsstap", "F-B: Arbeidsstap", "B: Afwenden", "E: Rechterhand", "Tussen E en H: Overgang arbeidsdraf", "M-X-K: Van hand veranderen en enkele passen de draf verruimen", "A: Afwenden", "Tussen D-X: Overgang arbeidsstap", "Tussen X-G: Halthouden en groeten", "In stap de rijbaan verlaten"]
-  }, {
-    "id": "B21",
-    "title": "Proef B21",
-    "steps": ["A-X-C: Binnenkomen in arbeidsdraf", "C: Rechterhand", "M-X-K: Van hand veranderen en enkele passen de draf verruimen", "Tussen A en F: Overgang arbeidsstap", "F-E: Van hand veranderen en enkele passen de stap verruimen", "Tussen E en H: Overgang arbeidsdraf", "C-X-C: Grote volte", "Op de volte tussen X en C: Arbeidsgalop rechts aanspringen", "B-E-B: Grote volte", "Tussen F en A: Overgang arbeidsdraf", "K-B: Van hand veranderen", "C-X-C: Grote volte", "Op de volte tussen X en C: Arbeidsgalop links aanspringen", "E-B-E: Grote volte", "Tussen K en A: Overgang arbeidsdraf", "B-E-B: Grote volte en na enkele drafpassen het paard de hals laten strekken", "Tussen B en M: Teugels op maat maken", "C: Afwenden", "A: Rechterhand", "K-X-M: Van hand veranderen en enkele passen de draf verruimen", "E: Afwenden", "B: Rechterhand", "A: Afwenden", "Tussen D en X: Overgang arbeidsstap", "Tussen X en G: Halthouden en groeten", "In stap de rijbaan verlaten"]
-  }
+const DRESSAGE_TESTS: DressageTest[] = [
+  {
+    id: 'B20',
+    title: 'Proef B20',
+    steps: [
+      'A-X-C: Binnenkomen in arbeidsdraf',
+      'C: Linkerhand',
+      'H-K: Gebroken lijn 5 meter',
+      'F-X-H: Van hand veranderen en enkele passen de draf verruimen',
+      'M-F: Gebroken lijn 5 meter',
+      'E-B-E: Grote volte en na enkele drafpassen het paard de hals laten strekken',
+      'Tussen E en H: Teugels op maat maken',
+      'B-E-B: Grote volte',
+      'Op de volte tussen E en B: Arbeidsgalop rechts aanspringen',
+      'A-X-A: Grote volte',
+      'Tussen A en K: Overgang arbeidsdraf',
+      'E-M: Van hand veranderen',
+      'C-X-C: Grote volte',
+      'Op de volte tussen X en C: Arbeidsgalop links aanspringen',
+      'E-B-E: Grote volte',
+      'Tussen E en K: Overgang arbeidsdraf',
+      'Tussen A en F: Overgang arbeidsstap',
+      'F-B: Arbeidsstap',
+      'B: Afwenden',
+      'E: Rechterhand',
+      'Tussen E en H: Overgang arbeidsdraf',
+      'M-X-K: Van hand veranderen en enkele passen de draf verruimen',
+      'A: Afwenden',
+      'Tussen D-X: Overgang arbeidsstap',
+      'Tussen X-G: Halthouden en groeten',
+      'In stap de rijbaan verlaten',
+    ],
+  },
+  {
+    id: 'B21',
+    title: 'Proef B21',
+    steps: [
+      'A-X-C: Binnenkomen in arbeidsdraf',
+      'C: Rechterhand',
+      'M-X-K: Van hand veranderen en enkele passen de draf verruimen',
+      'Tussen A en F: Overgang arbeidsstap',
+      'F-E: Van hand veranderen en enkele passen de stap verruimen',
+      'Tussen E en H: Overgang arbeidsdraf',
+      'C-X-C: Grote volte',
+      'Op de volte tussen X en C: Arbeidsgalop rechts aanspringen',
+      'B-E-B: Grote volte',
+      'Tussen F en A: Overgang arbeidsdraf',
+      'K-B: Van hand veranderen',
+      'C-X-C: Grote volte',
+      'Op de volte tussen X en C: Arbeidsgalop links aanspringen',
+      'E-B-E: Grote volte',
+      'Tussen K en A: Overgang arbeidsdraf',
+      'B-E-B: Grote volte en na enkele drafpassen het paard de hals laten strekken',
+      'Tussen B en M: Teugels op maat maken',
+      'C: Afwenden',
+      'A: Rechterhand',
+      'K-X-M: Van hand veranderen en enkele passen de draf verruimen',
+      'E: Afwenden',
+      'B: Rechterhand',
+      'A: Afwenden',
+      'Tussen D en X: Overgang arbeidsstap',
+      'Tussen X en G: Halthouden en groeten',
+      'In stap de rijbaan verlaten',
+    ],
+  },
 ];
 
-export const DressageReaderApp = (_props: AppComponentProps) => {
+export const DressageReaderApp = () => {
   const [selectedTest, setSelectedTest] = useState<DressageTest | null>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -34,12 +89,12 @@ export const DressageReaderApp = (_props: AppComponentProps) => {
 
   useEffect(() => {
     const loadVoices = () => {
-      const voices = window.speechSynthesis.getVoices().filter(v => v.lang.includes('nl'));
+      const voices = window.speechSynthesis.getVoices().filter((v) => v.lang.includes('nl'));
       if (voices.length > 0) {
         setAvailableVoices(voices);
-        setSelectedVoice(prev => {
+        setSelectedVoice((prev) => {
           if (prev) return prev;
-          const googleVoice = voices.find(v => v.name.toLowerCase().includes('google'));
+          const googleVoice = voices.find((v) => v.name.toLowerCase().includes('google'));
           return googleVoice ?? voices[0];
         });
       }
@@ -52,7 +107,7 @@ export const DressageReaderApp = (_props: AppComponentProps) => {
   }, []);
 
   useEffect(() => {
-    activeStepRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    activeStepRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }, [currentStepIndex]);
 
   const cancelActiveUtterance = () => {
@@ -76,7 +131,7 @@ export const DressageReaderApp = (_props: AppComponentProps) => {
 
     const advanceStep = () => {
       if (currentStepIndex < selectedTest.steps.length - 1) {
-        setCurrentStepIndex(i => i + 1);
+        setCurrentStepIndex((i) => i + 1);
       } else {
         setIsFinished(true);
       }
@@ -99,7 +154,7 @@ export const DressageReaderApp = (_props: AppComponentProps) => {
 
   const handleVorigeStap = () => {
     cancelActiveUtterance();
-    if (currentStepIndex > 0) setCurrentStepIndex(i => i - 1);
+    if (currentStepIndex > 0) setCurrentStepIndex((i) => i - 1);
   };
 
   const handleReset = () => {
@@ -111,121 +166,112 @@ export const DressageReaderApp = (_props: AppComponentProps) => {
   const selectValue = isSelfNarration ? SELF_NARRATION_VALUE : (selectedVoice?.name ?? '');
 
   return (
-    <div className="dressage-reader">
-      <aside className="dressage-reader__panel">
-        <div className="dressage-reader__panel-top">
-          <h2 className="dressage-reader__panel-title">Dressuur Voorlezer</h2>
-          <p className="dressage-reader__panel-subtitle">
-            Kies een proef en laat de app de stappen voorlezen.
-          </p>
+    <div className="dr">
+      <header className="dr__header">
+        <span className="dr__header-icon" aria-hidden="true">🐴</span>
+        <h1 className="dr__header-title">Dressuur Voorlezer</h1>
+      </header>
+
+      <div className="dr__controls">
+        <div className="dr__chips">
+          {DRESSAGE_TESTS.map((test) => (
+            <button
+              key={test.id}
+              type="button"
+              className={`dr__chip${selectedTest?.id === test.id ? ' dr__chip--active' : ''}`}
+              onClick={() => handleSelectTest(test)}
+            >
+              {test.title}
+            </button>
+          ))}
         </div>
 
-        <div className="dressage-reader__voice-section">
-          <label className="dressage-reader__section-label" htmlFor="voice-select">
-            Stem
-          </label>
+        <div className="dr__voice-row">
+          <label className="dr__voice-label" htmlFor="voice-select">Stem</label>
           <select
             id="voice-select"
-            className="dressage-reader__voice-select"
+            className="dr__voice-select"
             value={selectValue}
-            onChange={e => {
+            onChange={(e) => {
               if (e.target.value === SELF_NARRATION_VALUE) {
                 setSelectedVoice(null);
                 setIsSelfNarration(true);
               } else {
-                const voice = availableVoices.find(v => v.name === e.target.value) ?? null;
+                const voice = availableVoices.find((v) => v.name === e.target.value) ?? null;
                 setSelectedVoice(voice);
                 setIsSelfNarration(false);
               }
             }}
           >
-            {availableVoices.map(v => (
-              <option key={v.name} value={v.name}>
-                {v.name}
-              </option>
+            {availableVoices.map((v) => (
+              <option key={v.name} value={v.name}>{v.name}</option>
             ))}
             <option value={SELF_NARRATION_VALUE}>Zelf voorlezen</option>
           </select>
         </div>
+      </div>
 
-        <div className="dressage-reader__test-section">
-          <span className="dressage-reader__section-label">Proeven</span>
-          <nav className="dressage-reader__test-nav">
-            {DRESSAGE_TESTS.map(test => (
-              <button
-                key={test.id}
-                type="button"
-                className={`dressage-reader__test-item${selectedTest?.id === test.id ? ' dressage-reader__test-item--active' : ''}`}
-                onClick={() => handleSelectTest(test)}
-              >
-                {test.title}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </aside>
-
-      <div className="dressage-reader__content">
+      <main className="dr__main">
         {!selectedTest ? (
-          <div className="dressage-reader__welcome">
-            <span className="dressage-reader__welcome-icon" role="img" aria-label="paard">🐴</span>
-            <h2>Selecteer een proef</h2>
-            <p>Kies een dressuurproef in het menu aan de linkerzijde om te beginnen.</p>
+          <div className="dr__welcome">
+            <span className="dr__welcome-icon" role="img" aria-label="paard">🐴</span>
+            <p>Kies een proef hierboven om te beginnen.</p>
           </div>
         ) : (
           <>
-            <div className="dressage-reader__content-header">
-              <h2 className="dressage-reader__test-title">{selectedTest.title}</h2>
-              <span className="dressage-reader__badge">
-                {isFinished ? 'Klaar!' : `Stap ${currentStepIndex + 1} / ${selectedTest.steps.length}`}
-              </span>
-            </div>
-            <div className="dressage-reader__steps-wrap">
-              <ol className="dressage-reader__steps">
-                {selectedTest.steps.map((step, index) => (
-                  <li
-                    key={index}
-                    ref={index === currentStepIndex ? activeStepRef : null}
-                    className={[
-                      'dressage-reader__step',
-                      index === currentStepIndex && 'dressage-reader__step--active',
-                      index < currentStepIndex && 'dressage-reader__step--done',
-                    ].filter(Boolean).join(' ')}
-                  >
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <footer className="dressage-reader__footer">
-              <Button
-                type="button"
-                buttonStyle="ghost"
-                onClick={handleVorigeStap}
-                disabled={currentStepIndex === 0}
-              >
-                ← Vorige
-              </Button>
-              <Button
-                type="button"
-                buttonStyle="filled"
-                className="dressage-reader__play-btn"
-                onClick={handleVoorlezen}
-                disabled={isFinished}
-              >
-                {isSelfNarration ? 'Volgende Stap' : '▶\u00a0\u00a0Voorlezen Stap'}
-              </Button>
-              <Button
-                type="button"
-                buttonStyle="ghost"
-                onClick={handleReset}
-              >
-                ↺ Reset
-              </Button>
-            </footer>
+            <p className="dr__progress">
+              {isFinished ? 'Klaar! 🎉' : `Stap ${currentStepIndex + 1} van ${selectedTest.steps.length}`}
+            </p>
+            <ol className="dr__steps">
+              {selectedTest.steps.map((step, index) => (
+                <li
+                  key={index}
+                  ref={index === currentStepIndex ? activeStepRef : null}
+                  className={[
+                    'dr__step',
+                    index === currentStepIndex && 'dr__step--active',
+                    index < currentStepIndex && 'dr__step--done',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                >
+                  {step}
+                </li>
+              ))}
+            </ol>
           </>
         )}
-      </div>
+      </main>
+
+      <footer className="dr__footer">
+        <Button
+          type="button"
+          buttonStyle="ghost"
+          className="dr__btn"
+          onClick={handleVorigeStap}
+          disabled={!selectedTest || currentStepIndex === 0}
+        >
+          ← Vorige
+        </Button>
+        <Button
+          type="button"
+          buttonStyle="filled"
+          className="dr__btn dr__btn--primary"
+          onClick={handleVoorlezen}
+          disabled={!selectedTest || isFinished}
+        >
+          {isSelfNarration ? 'Volgende →' : '▶ Voorlezen'}
+        </Button>
+        <Button
+          type="button"
+          buttonStyle="ghost"
+          className="dr__btn"
+          onClick={handleReset}
+          disabled={!selectedTest}
+        >
+          ↺ Reset
+        </Button>
+      </footer>
     </div>
   );
 };
