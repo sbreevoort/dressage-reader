@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: react-app/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts && pnpm rebuild esbuild
         working-directory: react-app
 
       - name: Build
